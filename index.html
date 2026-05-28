@@ -1629,6 +1629,7 @@
 #bib .bempty-txt{font-family:'Playfair Display',serif;font-size:1rem;font-style:italic}
 #bib .bempty-sub{font-size:11px;font-family:'DM Mono',monospace;opacity:.7}
 #bib mark{background:rgba(231,111,81,.2);border-radius:2px;padding:0 2px}
+@keyframes spin{to{transform:rotate(360deg)}}
 </style>
 
 <div id="bib">
@@ -1667,7 +1668,8 @@ function wc(t){return t?t.split(/\s+/).filter(Boolean).length:0;}
 
 async function bLoad(){
   try{
-    var r=await fetch(SB+'/rest/v1/cuentos_repositorio?select=*&order=created_at',{headers:{'apikey':KEY,'Authorization':'Bearer '+KEY}});
+    // Load only lightweight metadata first (no historia/moraleja)
+    var r=await fetch(SB+'/rest/v1/cuentos_repositorio?select=id,titulo,escenario,personajes,moral_tema,edad_rango,tono,tags,es_destacado&order=created_at',{headers:{'apikey':KEY,'Authorization':'Bearer '+KEY}});
     stories=await r.json();
     bRenderTabs();bRenderList();
   }catch(e){document.getElementById('bCount').textContent='Error cargando cuentos';}
@@ -1685,7 +1687,7 @@ window.bSearch=function(){q=document.getElementById('bq').value.toLowerCase();bR
 
 function matchAll(s){
   if(!q)return true;
-  var haystack=[s.titulo,s.historia,s.moraleja,s.escenario,(s.personajes||[]).join(' '),(s.tags||[]).join(' ')].join(' ').toLowerCase();
+  var haystack=[s.titulo,s.historia||'',s.moraleja||'',s.escenario||'',(s.personajes||[]).join(' '),(s.tags||[]).join(' ')].join(' ').toLowerCase();
   return haystack.indexOf(q)>=0;
 }
 function snippet(s){
@@ -1708,9 +1710,19 @@ function bRenderList(){
     return'<div class="bitem'+(cur&&cur.id===s.id?' on':'')+'" onclick="bSel(''+s.id+'')"><div class="bitem-serie">'+emo(getSerie(s.titulo))+' '+getSerie(s.titulo)+'</div><div class="bitem-title">'+esc(s.titulo)+'</div>'+(hi?'<div class="bitem-match">'+hi+'</div>':'')+'</div>';
   }).join('');
 }
-window.bSel=function(id){
+window.bSel=async function(id){
   if(dirty&&!confirm('Descartar cambios no guardados?'))return;
-  cur=stories.filter(function(s){return s.id===id;})[0];
+  var meta=stories.filter(function(s){return s.id===id;})[0];
+  // Show loading state
+  document.getElementById('bMain').innerHTML='<div class="bempty"><div class="bempty-ico" style="font-size:2rem;animation:spin 1s linear infinite">&#9696;</div><div class="bempty-sub">Cargando cuento...</div></div>';
+  try{
+    var r=await fetch(SB+'/rest/v1/cuentos_repositorio?select=*&id=eq.'+id,{headers:{'apikey':KEY,'Authorization':'Bearer '+KEY}});
+    var arr=await r.json();
+    cur=arr[0];
+    // Update in stories array with full data
+    var idx=stories.findIndex(function(s){return s.id===id;});
+    if(idx>=0)stories[idx]=cur;
+  }catch(e){cur=meta;}
   dirty=false;bRenderEditor();bRenderList();
 };
 function bSt(cls,msg){var el=document.getElementById('bSt');if(el){el.className='bst '+cls;el.textContent=msg;}}
