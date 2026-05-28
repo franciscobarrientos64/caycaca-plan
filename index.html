@@ -855,7 +855,7 @@
 <nav>
   <div style="display:flex;align-items:baseline;gap:0.5rem;">
     <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" class="nav-brand" style="text-decoration:none;">Cayetana <span>&</span> Caca</a>
-    <span id="app-version" style="font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.1em;color:var(--smoke);opacity:0.75;">v2.7</span>
+    <span id="app-version" style="font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.1em;color:var(--smoke);opacity:0.75;">v2.8</span>
   </div>
   <ul class="nav-links">
     <li><a href="#universo">IP</a></li>
@@ -1658,14 +1658,151 @@
   </div>
 </div>
 
-</body></html>';
+<script>
+(function(){
+var SB='https://jmkvphayyhwzootlybde.supabase.co';
+var KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impta3ZwaGF5eWh3em9vdGx5YmRlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc5ODE3ODEsImV4cCI6MjA5MzU1Nzc4MX0.EP2vv5avU1FIXlZn4jFo3QkvqnxOdLOrICqNV8qAZxM';
+var stories=[],cur=null,dirty=false,activeSerie='Todos',q='';
+var SERIES=['Todos','Cayetana & Caca','Chimi & Chimu','Raya & Luna','Otros'];
+function getSerie(t){if(/Cayetana|Caca/i.test(t))return'Cayetana & Caca';if(/Chimi|Chimu/i.test(t))return'Chimi & Chimu';if(/^Raya|^Luna/i.test(t))return'Raya & Luna';return'Otros';}
+function emo(s){return({'Cayetana & Caca':'🐆','Chimi & Chimu':'🐱','Raya & Luna':'🐾','Otros':'📖'})[s]||'📖';}
+function esc(t){return String(t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function wc(t){return t?t.split(/\s+/).filter(Boolean).length:0;}
+
+async function bLoad(){
+  try{
+    // Load only lightweight metadata first (no historia/moraleja)
+    var r=await fetch(SB+'/rest/v1/cuentos_repositorio?select=id,titulo,escenario,personajes,moral_tema,edad_rango,tono,tags,es_destacado&order=created_at',{headers:{'apikey':KEY,'Authorization':'Bearer '+KEY}});
+    stories=await r.json();
+    bRenderTabs();bRenderList();
+  }catch(e){document.getElementById('bCount').textContent='Error cargando cuentos';}
+}
+
+function bRenderTabs(){
+  var counts={};
+  stories.forEach(function(s){var sr=getSerie(s.titulo);counts[sr]=(counts[sr]||0)+1;});
+  document.getElementById('bTabs').innerHTML=SERIES.map(function(s){
+    return '<button class="btab'+(activeSerie===s?' on':'')+'" onclick="bSetSerie(''+s+'')">'+(s==='Todos'?'Todo ('+stories.length+')':emo(s)+' '+(counts[s]||0))+'</button>';
+  }).join('');
+}
+window.bSetSerie=function(s){activeSerie=s;bRenderTabs();bRenderList();};
+window.bSearch=function(){q=document.getElementById('bq').value.toLowerCase();bRenderList();};
+
+function matchAll(s){
+  if(!q)return true;
+  var haystack=[s.titulo,s.historia||'',s.moraleja||'',s.escenario||'',(s.personajes||[]).join(' '),(s.tags||[]).join(' ')].join(' ').toLowerCase();
+  return haystack.indexOf(q)>=0;
+}
+function snippet(s){
+  if(!q)return'';
+  var fields=[s.historia,s.moraleja,s.escenario];
+  for(var i=0;i<fields.length;i++){
+    var f=fields[i]||'';
+    var idx=f.toLowerCase().indexOf(q);
+    if(idx>=0){var st=Math.max(0,idx-25);var en=Math.min(f.length,idx+q.length+35);return'...'+f.slice(st,en).replace(/
+/g,' ')+'...';}
+  }
+  return'';
+}
+function bRenderList(){
+  var items=stories.filter(function(s){return(activeSerie==='Todos'||getSerie(s.titulo)===activeSerie)&&matchAll(s);});
+  document.getElementById('bCount').textContent=items.length+' cuento'+(items.length!==1?'s':'')+(q?' — en contenido':'');
+  document.getElementById('bList').innerHTML=items.map(function(s){
+    var snip=snippet(s);
+    var hi=q?snip.replace(new RegExp(q.replace(/[.*+?^${}()|[\]\]/g,'\$&'),'gi'),function(m){return'<mark>'+m+'</mark>'}):'';
+    return'<div class="bitem'+(cur&&cur.id===s.id?' on':'')+'" onclick="bSel(''+s.id+'')"><div class="bitem-serie">'+emo(getSerie(s.titulo))+' '+getSerie(s.titulo)+'</div><div class="bitem-title">'+esc(s.titulo)+'</div>'+(hi?'<div class="bitem-match">'+hi+'</div>':'')+'</div>';
+  }).join('');
+}
+window.bSel=async function(id){
+  if(dirty&&!confirm('Descartar cambios no guardados?'))return;
+  var meta=stories.filter(function(s){return s.id===id;})[0];
+  // Show loading state
+  document.getElementById('bMain').innerHTML='<div class="bempty"><div class="bempty-ico" style="font-size:2rem;animation:spin 1s linear infinite">&#9696;</div><div class="bempty-sub">Cargando cuento...</div></div>';
+  try{
+    var r=await fetch(SB+'/rest/v1/cuentos_repositorio?select=*&id=eq.'+id,{headers:{'apikey':KEY,'Authorization':'Bearer '+KEY}});
+    var arr=await r.json();
+    cur=arr[0];
+    // Update in stories array with full data
+    var idx=stories.findIndex(function(s){return s.id===id;});
+    if(idx>=0)stories[idx]=cur;
+  }catch(e){cur=meta;}
+  dirty=false;bRenderEditor();bRenderList();
+};
+function bSt(cls,msg){var el=document.getElementById('bSt');if(el){el.className='bst '+cls;el.textContent=msg;}}
+window.bMarkDirty=function(){dirty=true;bSt('unsaved','● Sin guardar');};
+window.bSync=function(f,v){if(cur)cur[f]=v;};
+window.bSyncArr=function(f,v){if(cur)cur[f]=v.split(/[,
+]+/).map(function(x){return x.trim();}).filter(Boolean);};
+window.bWcUpd=function(){var h=document.getElementById('bf-hist'),w=document.getElementById('bWC');if(h&&w)w.textContent=wc(h.value)+' palabras';};
+
+function bRenderEditor(){
+  var s=cur;
+  document.getElementById('bMain').innerHTML=
+    '<div class="btopbar"><div class="btopbar-l"><div class="btopbar-serie">'+emo(getSerie(s.titulo))+' '+getSerie(s.titulo)+'</div><div class="btopbar-title">'+esc(s.titulo)+'</div></div>'+
+    '<div class="btopbar-r"><span class="bst saved" id="bSt">&#10003; Guardado</span>'+
+    '<button class="bbtn" onclick="bDlTXT()">TXT</button><button class="bbtn" onclick="bDlDOC()">Word</button><button class="bbtn" onclick="bDlPDF()">PDF</button>'+
+    '<button class="bbtn save" id="bSaveBtn" onclick="bSave()">Guardar en Alfred</button></div></div>'+
+    '<div class="beditor">'+
+    '<div class="bfield"><label class="blabel">Titulo</label><textarea class="binput btitle" id="bf-titulo" rows="2" oninput="bSync('titulo',this.value);bMarkDirty()">'+esc(s.titulo)+'</textarea></div>'+
+    '<div class="b2col">'+
+    '<div class="bfield"><label class="blabel">Escenario</label><textarea class="binput" rows="2" oninput="bSync('escenario',this.value);bMarkDirty()">'+esc(s.escenario)+'</textarea></div>'+
+    '<div class="bfield"><label class="blabel">Edad</label><textarea class="binput" rows="2" oninput="bSync('edad_rango',this.value);bMarkDirty()">'+esc(s.edad_rango)+'</textarea></div>'+
+    '<div class="bfield"><label class="blabel">Tono</label><textarea class="binput" rows="2" oninput="bSync('tono',this.value);bMarkDirty()">'+esc(s.tono)+'</textarea></div>'+
+    '<div class="bfield"><label class="blabel">Valores</label><textarea class="binput" rows="2" oninput="bSync('moral_tema',this.value);bMarkDirty()">'+esc(s.moral_tema)+'</textarea></div>'+
+    '</div>'+
+    '<div class="bfield"><label class="blabel">Personajes (uno por linea)</label><textarea class="binput" rows="3" oninput="bSyncArr('personajes',this.value);bMarkDirty()">'+esc((s.personajes||[]).join('
+'))+'</textarea></div>'+
+    '<hr class="bdivider">'+
+    '<div class="bfield"><label class="blabel">Historia</label><textarea class="binput bhistoria" id="bf-hist" oninput="bSync('historia',this.value);bMarkDirty();bWcUpd()">'+esc(s.historia)+'</textarea><div class="bwc" id="bWC">'+wc(s.historia)+' palabras</div></div>'+
+    '<div class="bfield"><label class="blabel">Moraleja</label><textarea class="binput bmoraleja" oninput="bSync('moraleja',this.value);bMarkDirty()">'+esc(s.moraleja)+'</textarea></div>'+
+    '<div class="bfield"><label class="blabel">Tags</label><textarea class="binput" rows="2" oninput="bSyncArr('tags',this.value);bMarkDirty()">'+esc((s.tags||[]).join(', '))+'</textarea></div>'+
+    '<div class="bdl"><span class="bdl-lbl">Descargar:</span>'+
+    '<button class="bdl-pill" onclick="bDlTXT()">TXT</button>'+
+    '<button class="bdl-pill" onclick="bDlDOC()">Word</button>'+
+    '<button class="bdl-pill" onclick="bDlPDF()">PDF</button></div>'+
+    '</div>';
+}
+
+window.bSave=async function(){
+  if(!cur)return;
+  var btn=document.getElementById('bSaveBtn');btn.disabled=true;bSt('saving','Guardando...');
+  var p={titulo:cur.titulo,historia:cur.historia,moraleja:cur.moraleja,personajes:cur.personajes,escenario:cur.escenario,tono:cur.tono,moral_tema:cur.moral_tema,edad_rango:cur.edad_rango,tags:cur.tags};
+  try{
+    var r=await fetch(SB+'/rest/v1/cuentos_repositorio?id=eq.'+cur.id,{method:'PATCH',headers:{'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(p)});
+    if(r.ok||r.status===204){dirty=false;bSt('saved','Guardado en Alfred');var i=stories.findIndex(function(s){return s.id===cur.id;});if(i>=0)Object.assign(stories[i],p);bRenderList();}
+    else bSt('error','Error '+r.status);
+  }catch(e){bSt('error','Sin conexion');}
+  btn.disabled=false;
+};
+
+function bFN(){return(cur.titulo||'cuento').replace(/[^\w\s]/g,'').replace(/\s+/g,'_').slice(0,60);}
+function bDl(blob,name){var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();}
+
+window.bDlTXT=function(){
+  var s=cur;
+  bDl(new Blob([s.titulo+'
+
+Personajes: '+(s.personajes||[]).join(', ')+'
+Escenario: '+(s.escenario||'')+'
+
+HISTORIA
+
+'+(s.historia||'')+'
+
+MORALEJA
+
+'+(s.moraleja||'')],{type:'text/plain;charset=utf-8'}),bFN()+'.txt');
+};
+window.bDlDOC=function(){
+  var s=cur;
+  var h='<html><head><meta charset="utf-8"><style>body{font-family:Calibri,sans-serif;font-size:12pt;line-height:1.7;margin:2.5cm}h1{font-size:20pt;font-weight:bold;margin-bottom:4pt}hr{border:none;border-top:1px solid #ccc;margin:16pt 0}p{margin-bottom:8pt}.meta{font-size:10pt;color:#888;margin-bottom:16pt}.mor{border-left:4px solid #E76F51;padding:12pt 14pt;margin-top:16pt;font-style:italic;background:#fdf6ec}</style></head><body><h1>'+s.titulo+'</h1><div class="meta"><b>Personajes:</b> '+(s.personajes||[]).join(', ')+'<br><b>Escenario:</b> '+(s.escenario||'')+'</div><hr>'+(s.historia||'').split('
+').map(function(l){return l?'<p>'+l+'</p>':''}).join('')+'<div class="mor"><b>Moraleja:</b> '+(s.moraleja||'')+'</div></body></html>';
   bDl(new Blob(['﻿'+h],{type:'application/msword'}),bFN()+'.doc');
 };
 window.bDlPDF=function(){
   var s=cur;
   var h='<!DOCTYPE html><html><head><meta charset="utf-8"><title>'+s.titulo+'</title><style>@page{margin:2.5cm}body{font-family:Georgia,serif;font-size:12pt;line-height:1.8;color:#1A1207}h1{font-size:20pt;font-weight:bold;margin-bottom:4pt}hr{border:none;border-top:1px solid #ddd;margin:18pt 0}p{margin-bottom:9pt}.meta{font-size:10pt;color:#888;margin-bottom:18pt}.mor{border-left:4px solid #E76F51;padding:12pt 14pt;margin-top:18pt;font-style:italic;background:#fdf6ec}</style></head><body><h1>'+s.titulo+'</h1><div class="meta">'+(s.personajes||[]).join(' · ')+' | '+(s.escenario||'')+'</div><hr>'+(s.historia||'').split('
-').map(function(l){return l?'<p>'+l+'</p>':''}).join('')+'<div class="mor">Moraleja: '+(s.moraleja||'')+'</div>
-</body></html>';
+').map(function(l){return l?'<p>'+l+'</p>':''}).join('')+'<div class="mor">Moraleja: '+(s.moraleja||'')+'</div></body></html>';
   var w=window.open('','_blank');w.document.write(h);w.document.close();w.onload=function(){w.focus();w.print();};
 };
 
@@ -1673,7 +1810,6 @@ bLoad();
 })();
 </script>
 </section>
-
 
 </body>
 </html>
