@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cayetana & Caca — Plan de Negocio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FDF6EC;
+    --parchment: #F5E6C8;
+    --amber: #F4A261;
+    --terracotta: #E76F51;
+    --rust: #C1440E;
+    --forest: #2D4A3E;
+    --forest-light: #3D6B5A;
+    --gold: #D4A017;
+    --ink: #1A1207;
+    --ink-soft: #3D2E18;
+    --smoke: #8B7355;
+    --olive: #6B7C3E;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(253,246,236,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(212,160,23,0.2);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--forest);
+    letter-spacing: -0.02em;
+  }
+
+  .nav-brand span { color: var(--terracotta); }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.78rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--smoke);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--terracotta); }
+
+  /* HERO */
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: -10%;
+    top: 10%;
+    width: 55%;
+    height: 80%;
+    background: radial-gradient(ellipse at center, rgba(244,162,97,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 1px;
+    background: var(--terracotta);
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+
+  .hero-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 3vw, 2.4rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--forest);
+    margin-bottom: 2rem;
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    color: var(--ink-soft);
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: var(--forest);
+    color: var(--cream);
+    text-decoration: none;
+    padding: 0.9rem 2rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    transition: all 0.25s;
+    border: 2px solid var(--forest);
+  }
+
+  .hero-cta:hover {
+    background: transparent;
+    color: var(--forest);
+  }
+
+
+  .universe-map {
+    width: min(460px, 90vw);
+    height: min(460px, 90vw);
+    position: relative;
+  }
+
+  .universe-circle {
+    position: absolute;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    font-family: 'Playfair Display', serif;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .uc-main {
+    width: 180px; height: 180px;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--forest);
+    color: var(--cream);
+    font-size: 1.05rem;
+    font-weight: 700;
+    z-index: 3;
+    box-shadow: 0 20px 60px rgba(45,74,62,0.35);
+  }
+
+  .uc-main span {
+    font-size: 2rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .uc-1 {
+    width: 130px; height: 130px;
+    top: 5%; left: 5%;
+    background: var(--terracotta);
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 600;
+    animation-delay: -2s;
+    box-shadow: 0 12px 40px rgba(231,111,81,0.4);
+  }
+
+  .uc-2 {
+    width: 130px; height: 130px;
+    bottom: 5%; right: 5%;
+    background: var(--amber);
+    color: var(--ink);
+    font-size: 0.8rem;
+    font-weight: 600;
+    animation-delay: -4s;
+    box-shadow: 0 12px 40px rgba(244,162,97,0.4);
+  }
+
+  .uc-3 {
+    width: 90px; height: 90px;
+    top: 10%; right: 10%;
+    background: var(--parchment);
+    color: var(--forest);
+    font-size: 0.65rem;
+    font-weight: 600;
+    border: 2px solid var(--gold);
+    animation-delay: -1s;
+  }
+
+  .uc-4 {
+    width: 90px; height: 90px;
+    bottom: 10%; left: 10%;
+    background: var(--parchment);
+    color: var(--forest);
+    font-size: 0.65rem;
+    font-weight: 600;
+    border: 2px solid var(--gold);
+    animation-delay: -3s;
+  }
+
+  .connector {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 260px; height: 260px;
+    transform: translate(-50%, -50%);
+    border: 1.5px dashed rgba(212,160,23,0.4);
+    border-radius: 50%;
+    z-index: 1;
+  }
+
+  @keyframes float {
+    0%, 100% { transform-origin: center; }
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(2deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+  }
+
+  .uc-main { animation: none; }
+
+  /* SECTIONS */
+  section {
+    padding: 100px 5%;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--terracotta);
+    letter-spacing: 0.1em;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+
+  h2 em { font-style: italic; color: var(--terracotta); }
+
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--forest);
+    margin-bottom: 0.8rem;
+  }
+
+  /* IP SECTION */
+  .ip-section { background: var(--forest); color: var(--cream); }
+  .ip-section h2 { color: var(--cream); }
+  .ip-section h2 em { color: var(--amber); }
+  .ip-section .section-num { color: var(--amber); }
+
+  .ip-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5px;
+    background: rgba(255,255,255,0.1);
+    border: 1.5px solid rgba(255,255,255,0.1);
+  }
+
+  .ip-card {
+    background: var(--forest);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ip-card::before {
+    content: attr(data-emoji);
+    position: absolute;
+    right: 1.5rem;
+    top: 1.5rem;
+    font-size: 3.5rem;
+    opacity: 0.2;
+  }
+
+  .ip-card h3 { color: var(--amber); }
+  .ip-card p { color: rgba(253,246,236,0.8); font-size: 0.9rem; line-height: 1.8; }
+
+  .ip-bridge {
+    grid-column: 1 / -1;
+    background: var(--amber);
+    padding: 1.5rem 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .ip-bridge-icon { font-size: 2rem; }
+
+  .ip-bridge-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .ip-bridge-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    margin-top: 0.3rem;
+  }
+
+  /* CHANNELS */
+  .channel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .channel-card {
+    border: 1.5px solid var(--parchment);
+    padding: 2rem;
+    background: white;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+
+  .channel-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(26,18,7,0.1);
+    border-color: var(--amber);
+  }
+
+  .channel-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--smoke);
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+
+  .channel-icon {
+    font-size: 2.2rem;
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  .channel-monetization {
+    margin-top: 1.2rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--parchment);
+  }
+
+  .channel-monetization h4 {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--smoke);
+    margin-bottom: 0.6rem;
+  }
+
+  .revenue-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 0.82rem;
+    padding: 0.2rem 0;
+    color: var(--ink-soft);
+  }
+
+  .revenue-val {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--forest);
+    font-weight: 500;
+  }
+
+  /* PLATFORMS */
+  .platform-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid var(--parchment);
+    margin-bottom: 2.5rem;
+    overflow-x: auto;
+  }
+
+  .tab-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    background: none;
+    border: none;
+    color: var(--smoke);
+    cursor: pointer;
+    position: relative;
+    white-space: nowrap;
+    transition: color 0.2s;
+  }
+
+  .tab-btn.active { color: var(--terracotta); }
+
+  .tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 2px;
+    background: var(--terracotta);
+  }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; animation: fadeIn 0.3s ease; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  .platform-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .platform-item {
+    padding: 1.2rem;
+    border: 1px solid var(--parchment);
+    background: var(--cream);
+  }
+
+  .platform-item .pi-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--forest);
+    margin-bottom: 0.3rem;
+  }
+
+  .platform-item .pi-use {
+    font-size: 0.78rem;
+    color: var(--smoke);
+    margin-bottom: 0.5rem;
+  }
+
+  .platform-item .pi-cost {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--terracotta);
+  }
+
+  /* CO-MARKETING */
+  .comarket-section { background: var(--parchment); }
+
+  .partner-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0;
+  }
+
+  .partner-table th {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--smoke);
+    padding: 0.8rem 1rem;
+    text-align: left;
+    border-bottom: 2px solid rgba(26,18,7,0.15);
+  }
+
+  .partner-table td {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(26,18,7,0.08);
+    font-size: 0.88rem;
+    vertical-align: top;
+  }
+
+  .partner-table tr:hover td { background: rgba(255,255,255,0.5); }
+
+  .tier-badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .tier-1 { background: var(--terracotta); color: white; }
+  .tier-2 { background: var(--amber); color: var(--ink); }
+  .tier-3 { background: var(--forest); color: var(--cream); }
+
+  /* ROADMAP */
+  .roadmap-phases {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .phase-block {
+    border: 1.5px solid var(--parchment);
+    overflow: hidden;
+  }
+
+  .phase-header {
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .phase-1 .phase-header { background: var(--terracotta); color: white; }
+  .phase-2 .phase-header { background: var(--forest); color: var(--cream); }
+  .phase-3 .phase-header { background: var(--ink); color: var(--cream); }
+
+  .phase-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .phase-dates {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    opacity: 0.8;
+  }
+
+  .task-list { padding: 1rem; background: white; }
+
+  .task-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    padding: 0.6rem 0.5rem;
+    border-bottom: 1px solid var(--parchment);
+    cursor: pointer;
+    transition: background 0.15s;
+    border-radius: 4px;
+  }
+
+  .task-item:last-child { border-bottom: none; }
+  .task-item:hover { background: var(--cream); }
+
+  .task-check {
+    width: 18px; height: 18px;
+    border: 2px solid var(--parchment);
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    background: white;
+  }
+
+  .task-item.done .task-check {
+    background: var(--forest);
+    border-color: var(--forest);
+    color: white;
+  }
+
+  .task-item.done .task-check::after {
+    content: '✓';
+    font-size: 0.65rem;
+    font-weight: 700;
+  }
+
+  .task-text {
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  .task-item.done .task-text {
+    text-decoration: line-through;
+    color: var(--smoke);
+  }
+
+  .milestone-badge {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--ink);
+    font-size: 0.6rem;
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-left: 0.4rem;
+    vertical-align: middle;
+  }
+
+  /* REVENUE */
+  .revenue-section { background: var(--ink); color: var(--cream); }
+  .revenue-section h2 { color: var(--cream); }
+  .revenue-section h2 em { color: var(--amber); }
+  .revenue-section .section-num { color: var(--amber); }
+
+  .revenue-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 3rem;
+  }
+
+  .rev-card {
+    background: var(--ink);
+    padding: 2rem;
+  }
+
+  .rev-channel {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--smoke);
+    margin-bottom: 0.6rem;
+  }
+
+  .rev-range {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+    margin-bottom: 0.4rem;
+  }
+
+  .rev-low {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--amber);
+  }
+
+  .rev-high {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--cream);
+  }
+
+  .rev-sep {
+    font-size: 0.8rem;
+    color: var(--smoke);
+  }
+
+  .rev-label {
+    font-size: 0.78rem;
+    color: rgba(253,246,236,0.6);
+  }
+
+  .total-bar {
+    background: var(--terracotta);
+    padding: 2rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .total-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: white;
+  }
+
+  .total-range {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: white;
+    letter-spacing: -0.02em;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--forest);
+    color: rgba(253,246,236,0.7);
+    padding: 3rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--cream);
+  }
+
+  .footer-brand span { color: var(--amber); }
+
+  .footer-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-align: right;
+  }
+
+  /* PROGRESS BAR */
+  .progress-banner {
+    background: var(--parchment);
+    border-bottom: 1px solid rgba(212,160,23,0.3);
+    padding: 0.6rem 5%;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 56px;
+  }
+
+  .progress-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--smoke);
+    white-space: nowrap;
+  }
+
+  .progress-track {
+    flex: 1;
+    height: 6px;
+    background: rgba(26,18,7,0.12);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--terracotta), var(--amber));
+    border-radius: 3px;
+    transition: width 0.5s ease;
+  }
+
+  .progress-pct {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--terracotta);
+    white-space: nowrap;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .hero { flex-direction: column; padding-top: 100px; }
+    .hero-content { flex: 0 0 100% !important; width: 100% !important; padding-right: 0 !important; }
+    .hero-visual { display: none; }
+    .ip-grid { grid-template-columns: 1fr; }
+    .roadmap-phases { grid-template-columns: 1fr; }
+    nav .nav-links { display: none; }
+    .total-bar { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+
+  /* SCROLL ANIMATION */
+  .stagger-1 { transition-delay: 0.1s; }
+  .stagger-2 { transition-delay: 0.2s; }
+  .stagger-3 { transition-delay: 0.3s; }
+
+  
+
+
+  /* ── HERO: bulletproof flexbox ── */
+  .hero {
+    min-height: 100vh;
+    display: flex !important;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding: 80px 5% 60px;
+    position: relative;
+    overflow: hidden;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .hero-content {
+    flex: 0 0 50% !important;
+    width: 50% !important;
+    max-width: 50%;
+    min-width: 0;
+    padding-right: 3rem;
+    box-sizing: border-box;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .hero-visual {
+    flex: 0 0 50% !important;
+    width: 50% !important;
+    max-width: 50%;
+    min-width: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">Cayetana <span>&</span> Caca</div>
+  <ul class="nav-links">
+    <li><a href="#universo">IP</a></li>
+    <li><a href="#canales">Canales</a></li>
+    <li><a href="#plataformas">Plataformas</a></li>
+    <li><a href="#comarketing">Co-Marketing</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#revenue">Revenue</a></li>
+    <li><a href="#benchmark">Benchmark</a></li>
+    <li><a href="#biblioteca" style="color:#2D4A3E;border:1px solid rgba(45,74,62,.5);padding:3px 10px;border-radius:2px;font-weight:600;">&#128218; Biblioteca</a></li>
+  </ul>
+</nav>
+
+<div class="progress-banner">
+  <span class="progress-label">Progreso del Proyecto</span>
+  <div class="progress-track">
+    <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+  </div>
+  <span class="progress-pct" id="progress-pct">0% completado</span>
+</div>
+
+<!-- HERO -->
+<section class="hero visible">
+  <div class="hero-content">
+    <div class="hero-eyebrow">Plan de Negocio 2025–2027</div>
+    <h1>Cayetana<br><em>&amp; Caca</em></h1>
+    <p class="hero-subtitle">El Bosque Escondido</p>
+    <p class="hero-desc">Un universo editorial infantil bilingüe construido desde dos historias reales: las noches de León y las noches de Cayetana. Cinco canales, un IP compartido, un perro peruano sin pelo que no existe en ningún otro lugar del mundo.</p>
+    <a href="#roadmap" class="hero-cta">Ver Roadmap →</a>
+  </div>
+  <div class="hero-visual">
+    <div class="universe-map">
+      <div class="connector"></div>
+      <div class="universe-circle uc-main">
+        <span>🐆</span>
+        <div>Cayetana</div>
+        <div style="font-size:0.65rem;opacity:0.7;font-family:'DM Sans';font-style:italic">el nexo</div>
+      </div>
+      <div class="universe-circle uc-1">
+        <div>🌲</div>
+        <div>Bosque<br>Escondido</div>
+      </div>
+      <div class="universe-circle uc-2">
+        <div>🐕</div>
+        <div>Cayetana<br>&amp; Caca</div>
+      </div>
+      <div class="universe-circle uc-3">
+        <div style="font-size:1.2rem">📚</div>
+        <div>Amazon<br>KDP</div>
+      </div>
+      <div class="universe-circle uc-4">
+        <div style="font-size:1.2rem">🎙️</div>
+        <div>Spotify<br>Podcast</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IP UNIVERSO -->
+<section class="ip-section" id="universo">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2>El <em>IP:</em><br>Universo Compartido</h2>
+  </div>
+  <div class="ip-grid">
+    <div class="ip-card" data-emoji="🌲">
+      <h3>El Bosque Escondido</h3>
+      <p>Luna (guepardo), Rayo, Nube, Doña Escama, Señor Rebotes y Moncho. El mundo de los valores: trabajo en equipo, buen corazón, comunidad. Las noches de León.</p>
+      <br>
+      <p><strong style="color:var(--amber)">Personaje clave:</strong> Luna la guepardo — Cayetana en su mundo animal.</p>
+    </div>
+    <div class="ip-card" data-emoji="🐕">
+      <h3>Cayetana & Caca</h3>
+      <p>Cayetana la guepardo elegante y Caca el perro peruano sin pelo. Hermanos de vida. Aventuras con humor, familia, identidad peruana. Las noches de Cayetana.</p>
+      <br>
+      <p><strong style="color:var(--amber)">Activo único:</strong> El perro peruano sin pelo no existe en ningún otro IP infantil global.</p>
+    </div>
+    <div class="ip-bridge">
+      <span class="ip-bridge-icon">🔗</span>
+      <div>
+        <div class="ip-bridge-text">Cayetana es el nexo de los dos universos</div>
+        <div class="ip-bridge-sub">El episodio crossover — cuando Caca entra al Bosque Escondido — es el pico de audiencia más anticipable del proyecto. El mismo mecanismo que hizo grande a Marvel.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CANALES -->
+<section id="canales">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2>Los Cinco<br><em>Canales</em></h2>
+  </div>
+  <div class="channel-grid">
+
+    <div class="channel-card">
+      <div class="channel-num">CANAL 01</div>
+      <span class="channel-icon">▶️</span>
+      <h3>YouTube</h3>
+      <p style="font-size:0.88rem;color:var(--ink-soft)">Cuentos ilustrados animados (Ken Burns effect). 8–12 min/episodio. Meta: 1,000 subs + 4,000 horas para YouTube Partner Program en mes 6.</p>
+      <div class="channel-monetization">
+        <h4>Monetización</h4>
+        <div class="revenue-row"><span>AdSense (10K subs)</span><span class="revenue-val">$100–200/mes</span></div>
+        <div class="revenue-row"><span>AdSense (100K subs)</span><span class="revenue-val">$1K–2.5K/mes</span></div>
+        <div class="revenue-row"><span>Brand Deals</span><span class="revenue-val">$500+/mes</span></div>
+      </div>
+    </div>
+
+    <div class="channel-card">
+      <div class="channel-num">CANAL 02</div>
+      <span class="channel-icon">🎙️</span>
+      <h3>Spotify & Podcasts</h3>
+      <p style="font-size:0.88rem;color:var(--ink-soft)">Audio-cuento con narración expresiva + música + efectos. Mayor margen por oyente. Distribución via Spotify for Podcasters + Buzzsprout.</p>
+      <div class="channel-monetization">
+        <h4>Monetización</h4>
+        <div class="revenue-row"><span>Spotify Partner (10K plays)</span><span class="revenue-val">$200–500/mes</span></div>
+        <div class="revenue-row"><span>Patreon ($3–5/mes)</span><span class="revenue-val">Escalable</span></div>
+        <div class="revenue-row"><span>Sponsorships</span><span class="revenue-val">$300+/mes</span></div>
+      </div>
+    </div>
+
+    <div class="channel-card">
+      <div class="channel-num">CANAL 03</div>
+      <span class="channel-icon">📱</span>
+      <h3>Social Media</h3>
+      <p style="font-size:0.88rem;color:var(--ink-soft)">Instagram: ilustraciones + valores. TikTok: cuento de 60 seg antes de dormir. Facebook: comunidad de padres. Pinterest: printables y actividades.</p>
+      <div class="channel-monetization">
+        <h4>Estrategia</h4>
+        <div class="revenue-row"><span>Instagram</span><span class="revenue-val">4x/semana</span></div>
+        <div class="revenue-row"><span>TikTok</span><span class="revenue-val">Diario</span></div>
+        <div class="revenue-row"><span>Facebook</span><span class="revenue-val">3x/semana</span></div>
+      </div>
+    </div>
+
+    <div class="channel-card">
+      <div class="channel-num">CANAL 04</div>
+      <span class="channel-icon">📖</span>
+      <h3>Amazon KDP</h3>
+      <p style="font-size:0.88rem;color:var(--ink-soft)">Print on demand. Sin inventario. 32 páginas, 8.5"x8.5", color. Royalty ~60%. QR al podcast/YouTube en cada libro. IngramSpark para librerías físicas.</p>
+      <div class="channel-monetization">
+        <h4>Monetización</h4>
+        <div class="revenue-row"><span>Royalty por copia ($14.99)</span><span class="revenue-val">~$6 USD</span></div>
+        <div class="revenue-row"><span>100 copias/mes</span><span class="revenue-val">$600/mes</span></div>
+        <div class="revenue-row"><span>Canal más duradero</span><span class="revenue-val">Pasivo</span></div>
+      </div>
+    </div>
+
+    <div class="channel-card">
+      <div class="channel-num">CANAL 05</div>
+      <span class="channel-icon">🛍️</span>
+      <h3>Merchandising</h3>
+      <p style="font-size:0.88rem;color:var(--ink-soft)">Redbubble + Merch by Amazon. Producto estrella: peluche de Caca (perro peruano sin pelo — oceano azul en IP infantil). Stickers, tazas, cuadernos.</p>
+      <div class="channel-monetization">
+        <h4>Monetización</h4>
+        <div class="revenue-row"><span>Redbubble (stickers)</span><span class="revenue-val">$0 setup</span></div>
+        <div class="revenue-row"><span>Peluche Caca (200 uds)</span><span class="revenue-val">~$2K inversión</span></div>
+        <div class="revenue-row"><span>Royalty Merch Amazon</span><span class="revenue-val">13–37%</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PLATAFORMAS -->
+<section id="plataformas" style="background: var(--parchment);">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2>Plataformas de<br><em>Producción</em></h2>
+  </div>
+
+  <div class="platform-tabs">
+    <button class="tab-btn active" onclick="showTab('libretos')">📝 Libretos</button>
+    <button class="tab-btn" onclick="showTab('ilustracion')">🎨 Ilustración</button>
+    <button class="tab-btn" onclick="showTab('video')">🎬 Video/Audio</button>
+    <button class="tab-btn" onclick="showTab('distribucion')">📡 Distribución</button>
+  </div>
+
+  <div id="tab-libretos" class="tab-panel active">
+    <div class="platform-grid">
+      <div class="platform-item"><div class="pi-name">Notion</div><div class="pi-use">Biblia del universo: personajes, reglas, arcos narrativos</div><div class="pi-cost">Free / $8/mes</div></div>
+      <div class="platform-item"><div class="pi-name">Google Docs</div><div class="pi-use">Escritura y co-edición de guiones episódicos</div><div class="pi-cost">Free</div></div>
+      <div class="platform-item"><div class="pi-name">Arc Studio</div><div class="pi-use">Formato profesional de libreto para audio/video</div><div class="pi-cost">Free tier</div></div>
+      <div class="platform-item"><div class="pi-name">Claude / ChatGPT</div><div class="pi-use">Co-escritura, variantes y desarrollo de historias</div><div class="pi-cost">$20/mes</div></div>
+    </div>
+  </div>
+
+  <div id="tab-ilustracion" class="tab-panel">
+    <p style="margin-bottom:1.5rem;font-size:0.88rem;color:var(--ink-soft)"><strong>Ruta recomendada: Híbrida</strong> — IA para fondos y storyboards, ilustrador humano para personajes principales. Reduce costos ~60% manteniendo coherencia visual.</p>
+    <div class="platform-grid">
+      <div class="platform-item"><div class="pi-name">MidJourney v6</div><div class="pi-use">Concept art, fondos, bocetos de personajes</div><div class="pi-cost">~$10/mes</div></div>
+      <div class="platform-item"><div class="pi-name">Krea.ai</div><div class="pi-use">Consistencia de personaje entre escenas (crítico)</div><div class="pi-cost">~$24/mes</div></div>
+      <div class="platform-item"><div class="pi-name">Adobe Firefly</div><div class="pi-use">Ilustraciones con control de estilo coherente</div><div class="pi-cost">Incluido CC</div></div>
+      <div class="platform-item"><div class="pi-name">Canva</div><div class="pi-use">Composición de páginas, posts, stories</div><div class="pi-cost">Free / Pro</div></div>
+      <div class="platform-item"><div class="pi-name">Workana</div><div class="pi-use">Ilustradores humanos Latam especializados</div><div class="pi-cost">Variable</div></div>
+      <div class="platform-item"><div class="pi-name">Fiverr Pro</div><div class="pi-use">Ilustradores children's books internacionales</div><div class="pi-cost">$800–2,500/libro</div></div>
+    </div>
+  </div>
+
+  <div id="tab-video" class="tab-panel">
+    <div class="platform-grid">
+      <div class="platform-item"><div class="pi-name">DaVinci Resolve</div><div class="pi-use">Edición de video profesional para YouTube</div><div class="pi-cost">Free</div></div>
+      <div class="platform-item"><div class="pi-name">Canva Video</div><div class="pi-use">Reels y Shorts con ilustraciones animadas</div><div class="pi-cost">Free/Pro</div></div>
+      <div class="platform-item"><div class="pi-name">ElevenLabs</div><div class="pi-use">Narración con voz IA emocional (prototipos)</div><div class="pi-cost">$5–22/mes</div></div>
+      <div class="platform-item"><div class="pi-name">CapCut</div><div class="pi-use">Edición rápida para TikTok y Reels</div><div class="pi-cost">Free</div></div>
+    </div>
+  </div>
+
+  <div id="tab-distribucion" class="tab-panel">
+    <div class="platform-grid">
+      <div class="platform-item"><div class="pi-name">Spotify for Podcasters</div><div class="pi-use">Distribución gratuita Spotify + Apple + Amazon</div><div class="pi-cost">Free</div></div>
+      <div class="platform-item"><div class="pi-name">Buzzsprout</div><div class="pi-use">Distribución multi-plataforma de podcast</div><div class="pi-cost">$12/mes</div></div>
+      <div class="platform-item"><div class="pi-name">Amazon KDP</div><div class="pi-use">Print on demand + distribución global</div><div class="pi-cost">Free (royalty %)</div></div>
+      <div class="platform-item"><div class="pi-name">IngramSpark</div><div class="pi-use">Librerías físicas (El Virrey, Ibero, etc.)</div><div class="pi-cost">~$49/ISBN</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CO-MARKETING -->
+<section class="comarket-section" id="comarketing">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2>Estrategia de<br><em>Co-Marketing</em></h2>
+  </div>
+
+  <table class="partner-table">
+    <thead>
+      <tr>
+        <th>Tier</th>
+        <th>Tipo de Partner</th>
+        <th>Fit Estratégico</th>
+        <th>Campaña Propuesta</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="tier-badge tier-1">Tier 1</span></td>
+        <td><strong>Marcas de comida peruana</strong><br><small style="color:var(--smoke)">Inca Kola, Gloria, Laive</small></td>
+        <td>Identidad peruana de Caca es su bandera central</td>
+        <td style="font-size:0.82rem;font-style:italic">"Caca prueba con pasión — igual que [marca]"</td>
+      </tr>
+      <tr>
+        <td><span class="tier-badge tier-1">Tier 1</span></td>
+        <td><strong>Hoteles boutique familias</strong><br><small style="color:var(--smoke)">Perú, destinos en historias</small></td>
+        <td>Cuentos de viaje + familias que viajan con hijos</td>
+        <td style="font-size:0.82rem;font-style:italic">Pack "noche de cuento" con libro incluido en habitación</td>
+      </tr>
+      <tr>
+        <td><span class="tier-badge tier-1">Tier 1</span></td>
+        <td><strong>Clínicas vet / marcas pet</strong><br><small style="color:var(--smoke)">Perú pet market</small></td>
+        <td>Caca es un perro — audiencia pet parents total</td>
+        <td style="font-size:0.82rem;font-style:italic">"Adopta como Caca: sé tú mismo"</td>
+      </tr>
+      <tr>
+        <td><span class="tier-badge tier-2">Tier 2</span></td>
+        <td><strong>Psicólogos y pedagogos infantiles</strong><br><small style="color:var(--smoke)">Instagram Latam</small></td>
+        <td>Contenido de valores detrás de cada historia</td>
+        <td style="font-size:0.82rem;font-style:italic">Collab "Los valores detrás de Doña Escama"</td>
+      </tr>
+      <tr>
+        <td><span class="tier-badge tier-2">Tier 2</span></td>
+        <td><strong>Restaurantes italianos Lima</strong><br><small style="color:var(--smoke)">Miraflores, San Isidro</small></td>
+        <td>El capítulo del banquete italiano ya existe</td>
+        <td style="font-size:0.82rem;font-style:italic">"Caca atacó el tiramisú. ¿Puedes culparlo?"</td>
+      </tr>
+      <tr>
+        <td><span class="tier-badge tier-2">Tier 2</span></td>
+        <td><strong>Canales maternidad/paternidad</strong><br><small style="color:var(--smoke)">YouTube/TikTok Latam</small></td>
+        <td>Audiencia exacta: padres que leen a sus hijos</td>
+        <td style="font-size:0.82rem;font-style:italic">Ep. collab "Cómo elegir un cuento para dormir"</td>
+      </tr>
+      <tr>
+        <td><span class="tier-badge tier-3">Tier 3</span></td>
+        <td><strong>Plataformas educativas</strong><br><small style="color:var(--smoke)">Kumon digital, colegios privados</small></td>
+        <td>Licencias de contenido para uso educativo</td>
+        <td style="font-size:0.82rem;font-style:italic">Horizonte 18–36 meses</td>
+      </tr>
+      <tr>
+        <td><span class="tier-badge tier-3">Tier 3</span></td>
+        <td><strong>Edición bilingüe EE.UU.</strong><br><small style="color:var(--smoke)">Mercado hispano</small></td>
+        <td>+60M hispanohablantes en EE.UU.</td>
+        <td style="font-size:0.82rem;font-style:italic">Horizonte 12–24 meses</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <h2>Roadmap<br><em>Interactivo</em></h2>
+  </div>
+  <p style="margin-bottom:2rem;color:var(--smoke);font-size:0.88rem">Haz click en cada tarea para marcarla como completada. El progreso se guarda automáticamente.</p>
+
+  <div class="roadmap-phases">
+
+    <div class="phase-block phase-1">
+      <div class="phase-header">
+        <div>
+          <div class="phase-title">Fase 1: Fundación</div>
+        </div>
+        <div class="phase-dates">May–Jul 2025</div>
+      </div>
+      <div class="task-list" id="phase-1-tasks">
+        <div class="task-item" onclick="toggleTask(this)">
+          <div class="task-check"></div>
+          <div class="task-text">Biblia del universo en Notion (personajes, reglas, valores)</div>
+        </div>
+        <div class="task-item" onclick="toggleTask(this)">
+          <div class="task-check"></div>
+          <div class="task-text">5 libretos completos (3 Cayetana & Caca + 2 Bosque Escondido)</div>
+        </div>
+        <div class="task-item" onclick="toggleTask(this)">
+          <div class="task-check"></div>
+          <div class="task-text">Definir estilo visual y paleta de colores del IP</div>
+        </div>
+        <div class="task-item" onclick="toggleTask(this)">
+          <div class="task-check"></div>
+          <div class="task-text">Prueba de concepto ilustración (IA híbrida o ilustrador)</div>
+        </div>
+        <div class="task-item" onclick="toggleTask(this)">
+          <div class="task-check"></div>
+          <div class="task-text">Registrar marcas en Indecopi</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-block phase-2">
+      <div class="phase-header">
+        <div>
+          <div class="phase-title">Fase 2: Lanzamiento</div>
+        </div>
+        <div class="phase-dates">Jul–Oct 2025</div>
+      </div>
+      <div class="task-list" id="phase-2-tasks">
+        <div class="task-item" onclick="toggleTask(this)">
+          <div class="task-check"></div>
+          <div class="task-text">Canal YouTube activo (mínimo 5 episodios al lanzar)</div>
+        </div>
+        <div class="task-item" onclick="toggleTask(this)">
+          <div class="task-check"></div>
+          <div class="task-text">Podcast live en Spotify + Apple Podcasts</div>
+        </div>
+        <div class="task-item" onclick="toggleTask(this)">
+          <div class="task-check"></div>
+          <div class="task-text">Instagram + TikTok activos con identidad visual</div>
+        </div>
+        <div class="task-item" onclick="toggleTask(this)">
+          <div class="task-check"></div>
+          <div class="task-text">Primer libro en Amazon KDP — Cayetana & Caca en el Gran Banquete Italiano</div>
+        </div>
+        <div class="task-item" onclick="toggleTask(this)">
+          <div class="task-check"></div>
+          <div class="task-text">Primeras 3 conversaciones con co-marketing partners</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-block phase-3">
+      <div class="phase-header">
+        <div>
+          <div class="phase-title">Fase 3: Escala</div>
+        </div>
+        <div class="phase-dates">Oct 2025–Jun 2026</div>
+      </div>
+      <div class="task-list" id="phase-3-tasks">
+        <div class="task-item" onclick="toggleTask(this)">
+          <div class="task-check"></div>
+          <div class="task-text">50+ episodios acumulados en YouTube</div>
+        </div>
+        <div class="task-item" onclick="toggleTask(this)">
+          <div class="task-check"></div>
+          <div class="task-text">Primer producto de merchandising live (Redbubble)</div>
+        </div>
+        <div class="task-item" onclick="toggleTask(this)">
+          <div class="task-check"></div>
+          <div class="task-text">Primer deal de sponsorship con marca (meta: 2–3 marcas)</div>
+        </div>
+        <div class="task-item" onclick="toggleTask(this)">
+          <div class="task-check"></div>
+          <div class="task-text">Segundo libro + explorar edición bilingüe español/inglés</div>
+        </div>
+        <div class="task-item" onclick="toggleTask(this)">
+          <div class="task-check"></div>
+          <div class="task-text">🏆 HITO: Episodio crossover — Caca entra al Bosque Escondido <span class="milestone-badge">Milestone</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- REVENUE -->
+<section class="revenue-section" id="revenue">
+  <div class="section-header">
+    <span class="section-num">06</span>
+    <h2>Proyección de<br><em>Revenue</em></h2>
+  </div>
+  <p style="color:rgba(253,246,236,0.6);font-size:0.85rem;margin-bottom:2.5rem">Mes 18 de operación. Escenario conservador vs. optimista.</p>
+
+  <div class="revenue-grid">
+    <div class="rev-card">
+      <div class="rev-channel">YouTube AdSense</div>
+      <div class="rev-range">
+        <span class="rev-low">$300</span>
+        <span class="rev-sep">→</span>
+        <span class="rev-high">$1,500</span>
+      </div>
+      <div class="rev-label">mensuales / mes 18</div>
+    </div>
+    <div class="rev-card">
+      <div class="rev-channel">Podcast + Patreon</div>
+      <div class="rev-range">
+        <span class="rev-low">$200</span>
+        <span class="rev-sep">→</span>
+        <span class="rev-high">$800</span>
+      </div>
+      <div class="rev-label">mayor margen por oyente</div>
+    </div>
+    <div class="rev-card">
+      <div class="rev-channel">Amazon KDP</div>
+      <div class="rev-range">
+        <span class="rev-low">$400</span>
+        <span class="rev-sep">→</span>
+        <span class="rev-high">$2,000</span>
+      </div>
+      <div class="rev-label">canal más duradero y pasivo</div>
+    </div>
+    <div class="rev-card">
+      <div class="rev-channel">Merchandising</div>
+      <div class="rev-range">
+        <span class="rev-low">$150</span>
+        <span class="rev-sep">→</span>
+        <span class="rev-high">$600</span>
+      </div>
+      <div class="rev-label">Redbubble + Merch Amazon</div>
+    </div>
+    <div class="rev-card">
+      <div class="rev-channel">Sponsorships</div>
+      <div class="rev-range">
+        <span class="rev-low">$500</span>
+        <span class="rev-sep">→</span>
+        <span class="rev-high">$3,000</span>
+      </div>
+      <div class="rev-label">marcas peruanas y Latam</div>
+    </div>
+  </div>
+
+  <div class="total-bar">
+    <div class="total-label">Total mensual proyectado — Mes 18</div>
+    <div class="total-range">$1,550 → $7,900 USD/mes</div>
+  </div>
+</section>
+
+<!-- BENCHMARK -->
+<section id="benchmark" style="background:var(--ink);color:var(--cream)">
+  <div class="section-header">
+    <span class="section-num" style="color:var(--amber)">07</span>
+    <h2 style="color:var(--cream)">Benchmark<br><em>Competitivo</em></h2>
+  </div>
+
+  <!-- INTRO STAT BLUEY -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.08);margin-bottom:4rem">
+    <div style="background:var(--ink);padding:2rem">
+      <div style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--smoke);margin-bottom:0.6rem">Bluey — watch time EEUU 2024</div>
+      <div style="font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;color:var(--amber);letter-spacing:-0.02em;line-height:1">55.6B</div>
+      <div style="font-size:0.78rem;color:rgba(253,246,236,0.55);margin-top:0.3rem">minutos en Disney+ · show más visto de toda plataforma</div>
+    </div>
+    <div style="background:var(--ink);padding:2rem">
+      <div style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--smoke);margin-bottom:0.6rem">BBC Studios — revenue 2024/25</div>
+      <div style="font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;color:var(--cream);letter-spacing:-0.02em;line-height:1">$2.9B</div>
+      <div style="font-size:0.78rem;color:rgba(253,246,236,0.55);margin-top:0.3rem">Bluey como motor principal · meta: "el próximo Mickey Mouse"</div>
+    </div>
+    <div style="background:var(--ink);padding:2rem">
+      <div style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--smoke);margin-bottom:0.6rem">Cocomelon — ad revenue mensual</div>
+      <div style="font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;color:var(--amber);letter-spacing:-0.02em;line-height:1">$11.3M</div>
+      <div style="font-size:0.78rem;color:rgba(253,246,236,0.55);margin-top:0.3rem">construido con ~20 empleados · inició como canal de garaje</div>
+    </div>
+    <div style="background:var(--ink);padding:2rem">
+      <div style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--smoke);margin-bottom:0.6rem">Spotify pagos a creadores Q1 2025</div>
+      <div style="font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;color:var(--cream);letter-spacing:-0.02em;line-height:1">$100M+</div>
+      <div style="font-size:0.78rem;color:rgba(253,246,236,0.55);margin-top:0.3rem">solo en el primer trimestre · 90% Latam usa Spotify para podcasts</div>
+    </div>
+  </div>
+
+  <!-- COMPARATIVE TABLE -->
+  <h3 style="color:var(--amber);margin-bottom:1.5rem;font-size:1.1rem;font-family:'DM Mono',monospace;letter-spacing:0.08em;text-transform:uppercase">Comparativa de IPs</h3>
+  <div style="overflow-x:auto;margin-bottom:4rem">
+    <table style="width:100%;border-collapse:collapse;min-width:700px">
+      <thead>
+        <tr>
+          <th style="font-family:'DM Mono',monospace;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--smoke);padding:0.8rem 1rem;text-align:left;border-bottom:1px solid rgba(255,255,255,0.1)">IP</th>
+          <th style="font-family:'DM Mono',monospace;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--smoke);padding:0.8rem 1rem;text-align:left;border-bottom:1px solid rgba(255,255,255,0.1)">Propuesta narrativa</th>
+          <th style="font-family:'DM Mono',monospace;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--smoke);padding:0.8rem 1rem;text-align:left;border-bottom:1px solid rgba(255,255,255,0.1)">Canal primario</th>
+          <th style="font-family:'DM Mono',monospace;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--smoke);padding:0.8rem 1rem;text-align:left;border-bottom:1px solid rgba(255,255,255,0.1)">Escala actual</th>
+          <th style="font-family:'DM Mono',monospace;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--smoke);padding:0.8rem 1rem;text-align:left;border-bottom:1px solid rgba(255,255,255,0.1)">Lección clave</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+          <td style="padding:1rem;vertical-align:top">
+            <div style="font-family:'Playfair Display',serif;font-weight:700;color:var(--amber);font-size:1rem">🐕 Bluey</div>
+            <div style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--smoke);margin-top:0.2rem">Australia · 2018</div>
+          </td>
+          <td style="padding:1rem;font-size:0.85rem;color:rgba(253,246,236,0.8);vertical-align:top;line-height:1.6">Familia realista, doble codificación niño/adulto, emociones complejas sin moralizar. Episodios de 7 min auto-contenidos.</td>
+          <td style="padding:1rem;font-size:0.85rem;color:rgba(253,246,236,0.7);vertical-align:top">Disney+ / YouTube</td>
+          <td style="padding:1rem;vertical-align:top">
+            <div style="font-family:'DM Mono',monospace;font-size:0.78rem;color:var(--amber)">$3.6B retail global</div>
+            <div style="font-size:0.75rem;color:var(--smoke)">Show más visto EE.UU. 2024–25</div>
+          </td>
+          <td style="padding:1rem;font-size:0.82rem;color:rgba(253,246,236,0.7);vertical-align:top;font-style:italic">La autenticidad cultural + dual audience multiplica la audiencia sin multiplicar el costo</td>
+        </tr>
+        <tr style="border-bottom:1px solid rgba(255,255,255,0.05);background:rgba(255,255,255,0.02)">
+          <td style="padding:1rem;vertical-align:top">
+            <div style="font-family:'Playfair Display',serif;font-weight:700;color:var(--cream);font-size:1rem">🎵 Cocomelon</div>
+            <div style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--smoke);margin-top:0.2rem">EE.UU. · 2006</div>
+          </td>
+          <td style="padding:1rem;font-size:0.85rem;color:rgba(253,246,236,0.8);vertical-align:top;line-height:1.6">Canciones + rutinas infantiles. Repetición hipnótica. Sin dual audience, sin arcos narrativos. SEO-driven.</td>
+          <td style="padding:1rem;font-size:0.85rem;color:rgba(253,246,236,0.7);vertical-align:top">YouTube puro</td>
+          <td style="padding:1rem;vertical-align:top">
+            <div style="font-family:'DM Mono',monospace;font-size:0.78rem;color:var(--amber)">$100M+/año</div>
+            <div style="font-size:0.75rem;color:var(--smoke)">2.5B vistas/mes · ~20 empleados</div>
+          </td>
+          <td style="padding:1rem;font-size:0.82rem;color:rgba(253,246,236,0.7);vertical-align:top;font-style:italic">Prueba que escala sin narrativa es posible — pero te deja atrapado por el algoritmo y sin relación con padres</td>
+        </tr>
+        <tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+          <td style="padding:1rem;vertical-align:top">
+            <div style="font-family:'Playfair Display',serif;font-weight:700;color:var(--cream);font-size:1rem">🐷 Peppa Pig</div>
+            <div style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--smoke);margin-top:0.2rem">UK · 2004</div>
+          </td>
+          <td style="padding:1rem;font-size:0.85rem;color:rgba(253,246,236,0.8);vertical-align:top;line-height:1.6">Familia disfuncional con humor absurdo. Papá Pig incompetente y adorable. Episodios de 5 min.</td>
+          <td style="padding:1rem;font-size:0.85rem;color:rgba(253,246,236,0.7);vertical-align:top">TV + YouTube</td>
+          <td style="padding:1rem;vertical-align:top">
+            <div style="font-family:'DM Mono',monospace;font-size:0.78rem;color:var(--amber)">$2B retail/año</div>
+            <div style="font-size:0.75rem;color:var(--smoke)">Hasbro · licencias masivas</div>
+          </td>
+          <td style="padding:1rem;font-size:0.82rem;color:rgba(253,246,236,0.7);vertical-align:top;font-style:italic">Los padres como personajes imperfectos y humanos generan empatía adulta que sostiene el IP más allá de la infancia</td>
+        </tr>
+        <tr style="border-bottom:1px solid rgba(255,255,255,0.05);background:rgba(255,255,255,0.02)">
+          <td style="padding:1rem;vertical-align:top">
+            <div style="font-family:'Playfair Display',serif;font-weight:700;color:var(--cream);font-size:1rem">🐾 Paw Patrol</div>
+            <div style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--smoke);margin-top:0.2rem">Canadá · 2013</div>
+          </td>
+          <td style="padding:1rem;font-size:0.85rem;color:rgba(253,246,236,0.8);vertical-align:top;line-height:1.6">Rescue missions + personajes con habilidades especializadas. Cada personaje = un vehículo = un juguete.</td>
+          <td style="padding:1rem;font-size:0.85rem;color:rgba(253,246,236,0.7);vertical-align:top">TV + YouTube</td>
+          <td style="padding:1rem;vertical-align:top">
+            <div style="font-family:'DM Mono',monospace;font-size:0.78rem;color:var(--amber)">Multibillion franchise</div>
+            <div style="font-size:0.75rem;color:var(--smoke)">Spin Master · merchandise-first</div>
+          </td>
+          <td style="padding:1rem;font-size:0.82rem;color:rgba(253,246,236,0.7);vertical-align:top;font-style:italic">Diseñaron el juguete antes que el guión. El personaje es el producto. La narrativa es el catálogo.</td>
+        </tr>
+        <tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+          <td style="padding:1rem;vertical-align:top">
+            <div style="font-family:'Playfair Display',serif;font-weight:700;color:var(--cream);font-size:1rem">🐶 Hey Duggee</div>
+            <div style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--smoke);margin-top:0.2rem">UK · 2014</div>
+          </td>
+          <td style="padding:1rem;font-size:0.85rem;color:rgba(253,246,236,0.8);vertical-align:top;line-height:1.6">Club de actividades + insignias. Humor surreal para adultos. Duggee no habla (solo "¡Woof!") → elimina barreras de idioma.</td>
+          <td style="padding:1rem;font-size:0.85rem;color:rgba(253,246,236,0.7);vertical-align:top">CBeebies / YouTube</td>
+          <td style="padding:1rem;vertical-align:top">
+            <div style="font-family:'DM Mono',monospace;font-size:0.78rem;color:var(--amber)">3B views YouTube</div>
+            <div style="font-size:0.75rem;color:var(--smoke)">1.36B streams iPlayer · renovado hasta serie 8</div>
+          </td>
+          <td style="padding:1rem;font-size:0.82rem;color:rgba(253,246,236,0.7);vertical-align:top;font-style:italic">La no-verbalidad del personaje principal es un genio de diseño: trivializa el doblaje y la expansión global</td>
+        </tr>
+        <tr style="background:rgba(244,162,97,0.08);border:1px solid rgba(244,162,97,0.3)">
+          <td style="padding:1rem;vertical-align:top">
+            <div style="font-family:'Playfair Display',serif;font-weight:900;color:var(--amber);font-size:1rem">🐆 Cayetana & Caca</div>
+            <div style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--terracotta);margin-top:0.2rem">Perú · 2025 →</div>
+          </td>
+          <td style="padding:1rem;font-size:0.85rem;color:rgba(253,246,236,0.9);vertical-align:top;line-height:1.6">Familia blendeada + aventuras con humor situacional. Identidad peruana. Doble codificación niño/adulto. Shared universe.</td>
+          <td style="padding:1rem;font-size:0.85rem;color:var(--amber);vertical-align:top;font-weight:600">Multi-canal desde día 1</td>
+          <td style="padding:1rem;vertical-align:top">
+            <div style="font-family:'DM Mono',monospace;font-size:0.78rem;color:var(--amber)">Por construir</div>
+            <div style="font-size:0.75rem;color:rgba(244,162,97,0.7)">Primer IP original Latam en esta arquitectura</div>
+          </td>
+          <td style="padding:1rem;font-size:0.82rem;color:var(--amber);vertical-align:top;font-style:italic;font-weight:600">Primer IP infantil con personaje peruano patrimonio cultural + shared universe + derechos 100% propios desde el inicio</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- NARRATIVE DNA -->
+  <h3 style="color:var(--amber);margin-bottom:1.5rem;font-size:1.1rem;font-family:'DM Mono',monospace;letter-spacing:0.08em;text-transform:uppercase">El motor narrativo: la fórmula Bluey desglosada</h3>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-bottom:4rem">
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);padding:2rem">
+      <div style="font-size:2rem;margin-bottom:1rem">🔢</div>
+      <h4 style="font-family:'Playfair Display',serif;color:var(--cream);font-size:1.1rem;margin-bottom:0.8rem">Doble codificación</h4>
+      <p style="font-size:0.85rem;color:rgba(253,246,236,0.7);line-height:1.7">El mismo episodio hace reír distinto a un niño de 4 años que a su padre de 35. Stuart Hall lo llama encoding/decoding: el mismo contenido se decodifica según la audiencia. Eso <strong style="color:var(--amber)">duplica la audiencia efectiva sin duplicar el costo</strong>.</p>
+      <div style="margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,0.08);font-size:0.78rem;color:var(--terracotta);font-style:italic">En Caca: la escena del tiramisú hace reír distinto al niño (el perro saltó) que al adulto (la Signora Ricci, el camarero, Cayetana disculpándose con clase).</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);padding:2rem">
+      <div style="font-size:2rem;margin-bottom:1rem">🏠</div>
+      <h4 style="font-family:'Playfair Display',serif;color:var(--cream);font-size:1.1rem;margin-bottom:0.8rem">Padres reales, no ausentes</h4>
+      <p style="font-size:0.85rem;color:rgba(253,246,236,0.7);line-height:1.7">Los shows infantiles anteriores o ignoraban a los padres (Max & Ruby) o los pintaban como incompetentes (Los Padrinos Mágicos). Bluey fue el primero en mostrar padres que genuinamente disfrutan de sus hijos, cometen errores y aprenden.</p>
+      <div style="margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,0.08);font-size:0.78rem;color:var(--terracotta);font-style:italic">En Caca: Francisco y Karina son el motor invisible de cada historia. La familia blendeada es un espejo para millones de familias modernas en Latam.</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);padding:2rem">
+      <div style="font-size:2rem;margin-bottom:1rem">🌏</div>
+      <h4 style="font-family:'Playfair Display',serif;color:var(--cream);font-size:1.1rem;margin-bottom:0.8rem">Autenticidad cultural irreplicable</h4>
+      <p style="font-size:0.85rem;color:rgba(253,246,236,0.7);line-height:1.7">El ethos australiano de Bluey es lo que lo hace ganador en EE.UU.: no intenta ser universal, <em>es</em> específico. La paradoja del contenido cultural: cuanto más específico y auténtico, más universal resuena.</p>
+      <div style="margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,0.08);font-size:0.78rem;color:var(--terracotta);font-style:italic">En Caca: el perro peruano sin pelo no existe en ningún otro IP infantil global. Eso no es una limitación — es la ventaja competitiva más dura de replicar.</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);padding:2rem">
+      <div style="font-size:2rem;margin-bottom:1rem">📐</div>
+      <h4 style="font-family:'Playfair Display',serif;color:var(--cream);font-size:1.1rem;margin-bottom:0.8rem">Auto-contenido + universo acumulativo</h4>
+      <p style="font-size:0.85rem;color:rgba(253,246,236,0.7);line-height:1.7">Cada episodio de 7 min funciona solo. Pero los niños que ven desde el inicio construyen un mapa emocional del universo. La repetición que los niños demandan no agota a los padres porque cada rewatch activa capas distintas.</p>
+      <div style="margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,0.08);font-size:0.78rem;color:var(--terracotta);font-style:italic">El episodio crossover Caca → Bosque Escondido activa exactamente este mecanismo: recompensa a los viewers que conocen ambos universos.</div>
+    </div>
+  </div>
+
+  <!-- BRECHA LATAM -->
+  <div style="background:var(--terracotta);padding:2.5rem;margin-bottom:4rem">
+    <div style="font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:1rem">La brecha de mercado</div>
+    <p style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:white;line-height:1.4;margin-bottom:1.2rem">No existe ningún IP infantil original en español, construido desde Latinoamérica, con personajes culturalmente latinoamericanos, operando a escala multi-canal con derechos 100% propios.</p>
+    <p style="font-size:0.88rem;color:rgba(255,255,255,0.85);line-height:1.8">El ecosistema de podcasts y cuentos en español está poblado de operaciones artesanales sin estrategia de IP, sin merchandise y sin arquitectura de universo. La competencia directa son productoras individuales con buena narración pero sin escala. YouTube es, según la industria, "la página de inicio del internet de los niños" — y en español, esa página está en blanco para contenido narrativo original de calidad.</p>
+  </div>
+
+  <!-- TRAMPAS A EVITAR -->
+  <h3 style="color:var(--amber);margin-bottom:1.5rem;font-size:1.1rem;font-family:'DM Mono',monospace;letter-spacing:0.08em;text-transform:uppercase">Las trampas que matan IPs infantiles</h3>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem">
+    <div style="border:1px solid rgba(231,111,81,0.4);padding:1.5rem;background:rgba(231,111,81,0.06)">
+      <div style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--terracotta);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.8rem">⚠ La trampa Cocomelon</div>
+      <p style="font-size:0.83rem;color:rgba(253,246,236,0.75);line-height:1.7">Crecer en YouTube puro sin construir IP con profundidad narrativa. Sin dual audience que sostenga cuando los niños crecen — los padres se alivian cuando sus hijos lo dejan, no lo extrañan. El algoritmo manda.</p>
+    </div>
+    <div style="border:1px solid rgba(231,111,81,0.4);padding:1.5rem;background:rgba(231,111,81,0.06)">
+      <div style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--terracotta);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.8rem">⚠ La trampa del merchandise tardío</div>
+      <p style="font-size:0.83rem;color:rgba(253,246,236,0.75);line-height:1.7">Paw Patrol diseñó el juguete antes que el guión. El peluche de Caca (wrinkly, sin pelo, con expresión de "lo probé con pasión") debe estar en la biblia del universo desde el día 1 — no como afterthought al año 2.</p>
+    </div>
+    <div style="border:1px solid rgba(231,111,81,0.4);padding:1.5rem;background:rgba(231,111,81,0.06)">
+      <div style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--terracotta);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.8rem">⚠ La trampa de los derechos</div>
+      <p style="font-size:0.83rem;color:rgba(253,246,236,0.75);line-height:1.7">Australia cedió los derechos de Bluey a BBC Studios, que los monetizó en miles de millones. Si Disney Latam o Netflix Kids se interesan, retener derechos de distribución digital + merchandise no es negociable. El error de Bluey no debe repetirse.</p>
+    </div>
+    <div style="border:1px solid rgba(231,111,81,0.4);padding:1.5rem;background:rgba(231,111,81,0.06)">
+      <div style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--terracotta);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.8rem">⚠ La trampa del moralismo</div>
+      <p style="font-size:0.83rem;color:rgba(253,246,236,0.75);line-height:1.7">Los mejores IPs infantiles "tejen la lección en la narrativa sin ser predicadores." Doña Escama no da un sermón — resuelve un problema. Cayetana no regaña a Caca por el tiramisú — lo perdona. La moraleja emerge, no se impone.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">Cayetana <span>&</span> Caca</div>
+  <div class="footer-meta">
+    Plan de Negocio v1.1 — con Benchmark<br>
+    Proyecto CAYCACA — Alfred Dashboard<br>
+    <span id="last-updated"></span>
+  </div>
+</footer>
+
+<script>
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('section:not(.hero)').forEach(s => observer.observe(s));
+
+  // Tabs
+  function showTab(name) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  // Task toggle with persistence
+  function toggleTask(el) {
+    el.classList.toggle('done');
+    saveProgress();
+    updateProgress();
+  }
+
+  function saveProgress() {
+    const tasks = document.querySelectorAll('.task-item');
+    const state = Array.from(tasks).map(t => t.classList.contains('done'));
+    try { localStorage.setItem('caycaca_progress', JSON.stringify(state)); } catch(e) {}
+  }
+
+  function loadProgress() {
+    try {
+      const saved = localStorage.getItem('caycaca_progress');
+      if (saved) {
+        const state = JSON.parse(saved);
+        const tasks = document.querySelectorAll('.task-item');
+        tasks.forEach((t, i) => {
+          if (state[i]) t.classList.add('done');
+        });
+      }
+    } catch(e) {}
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const tasks = document.querySelectorAll('.task-item');
+    const done = document.querySelectorAll('.task-item.done').length;
+    const pct = Math.round((done / tasks.length) * 100);
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('progress-pct').textContent = pct + '% completado (' + done + '/' + tasks.length + ')';
+  }
+
+  // Date
+  document.getElementById('last-updated').textContent = 'Actualizado: ' + new Date().toLocaleDateString('es-PE', {day:'2-digit', month:'long', year:'numeric'});
+
+  loadProgress();
+</script>
+<!-- BIBLIOTECA ─────────────────────────────────────── -->
+<section id="biblioteca" style="padding:0;opacity:1;transform:none;">
+
+<div style="padding:60px 5% 36px;background:var(--forest);color:var(--cream);">
+  <span style="font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--amber);display:block;margin-bottom:.5rem">08</span>
+  <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:900;line-height:1.05;color:var(--cream);">Biblioteca &amp; <em style="font-style:italic;color:var(--amber)">Editor</em></h2>
+  <p style="color:rgba(253,246,236,.65);font-size:.88rem;margin-top:.8rem;font-family:'DM Sans',sans-serif;">55 cuentos · busca en títulos y contenido completo · edita y guarda en Alfred</p>
+</div>
+
+<style>
+#bib{display:flex;height:calc(100vh - 56px);min-height:600px;font-family:'DM Sans',sans-serif;background:#FDF6EC}
+#bib .bsb{width:300px;min-width:300px;background:#F5E6C8;border-right:1px solid rgba(212,160,23,.3);display:flex;flex-direction:column;overflow:hidden}
+#bib .bsb-head{padding:16px;background:#2D4A3E;color:#FDF6EC;border-bottom:1px solid rgba(255,255,255,.1)}
+#bib .bsb-head h3{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:2px}
+#bib .bsb-head p{font-size:.68rem;opacity:.6;font-family:'DM Mono',monospace;letter-spacing:.05em}
+#bib .bsb-search{padding:10px 12px;border-bottom:1px solid rgba(212,160,23,.25);background:#F5E6C8}
+#bib .bsb-search input{width:100%;padding:8px 10px;border:1px solid rgba(212,160,23,.35);border-radius:4px;font-size:12px;background:white;color:#1A1207;font-family:'DM Sans',sans-serif;outline:none}
+#bib .bsb-search input:focus{border-color:#E76F51}
+#bib .bsb-search .sh-note{font-size:9px;font-family:'DM Mono',monospace;color:#8B7355;margin-top:4px}
+#bib .bsb-tabs{display:flex;padding:8px;gap:4px;flex-wrap:wrap;border-bottom:1px solid rgba(212,160,23,.2);background:#F5E6C8}
+#bib .btab{font-size:9.5px;font-family:'DM Mono',monospace;padding:3px 8px;border-radius:20px;cursor:pointer;border:1px solid rgba(212,160,23,.3);background:white;color:#8B7355;transition:all .15s}
+#bib .btab.on{background:#E76F51;color:white;border-color:#E76F51}
+#bib .bsb-count{padding:6px 14px;font-size:9.5px;color:#8B7355;font-family:'DM Mono',monospace;border-bottom:1px solid rgba(212,160,23,.15);background:#F5E6C8}
+#bib .bsb-list{flex:1;overflow-y:auto}
+#bib .bsb-list::-webkit-scrollbar{width:4px}
+#bib .bsb-list::-webkit-scrollbar-thumb{background:rgba(212,160,23,.3);border-radius:2px}
+#bib .bitem{padding:10px 14px;cursor:pointer;border-bottom:1px solid rgba(212,160,23,.12);transition:background .1s}
+#bib .bitem:hover{background:rgba(231,111,81,.1)}
+#bib .bitem.on{background:rgba(231,111,81,.14);border-left:3px solid #E76F51}
+#bib .bitem-serie{font-size:9.5px;color:#8B7355;font-family:'DM Mono',monospace;margin-bottom:3px;text-transform:uppercase;letter-spacing:.05em}
+#bib .bitem-title{font-size:12px;color:#1A1207;line-height:1.4;font-family:'Playfair Display',serif}
+#bib .bitem-match{font-size:10px;color:#E76F51;font-family:'DM Mono',monospace;margin-top:2px;font-style:italic;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#bib .bmain{flex:1;display:flex;flex-direction:column;overflow:hidden;background:#FDF6EC}
+#bib .btopbar{display:flex;align-items:center;justify-content:space-between;padding:12px 24px;border-bottom:1px solid rgba(212,160,23,.2);background:#FDF6EC;min-height:54px;flex-shrink:0}
+#bib .btopbar-l{display:flex;flex-direction:column;gap:2px;min-width:0}
+#bib .btopbar-serie{font-size:9.5px;font-family:'DM Mono',monospace;color:#8B7355;text-transform:uppercase;letter-spacing:.08em}
+#bib .btopbar-title{font-size:14px;font-weight:700;color:#1A1207;font-family:'Playfair Display',serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:400px}
+#bib .btopbar-r{display:flex;align-items:center;gap:8px;flex-shrink:0}
+#bib .bst{font-size:11px;font-family:'DM Mono',monospace}
+#bib .bst.saved{color:#2D4A3E}
+#bib .bst.unsaved{color:#E76F51}
+#bib .bst.saving{color:#8B7355}
+#bib .bst.error{color:#C1440E}
+#bib .bbtn{font-family:'DM Sans',sans-serif;font-size:11px;padding:6px 12px;border-radius:3px;cursor:pointer;border:1px solid rgba(212,160,23,.35);transition:all .15s;background:white;color:#8B7355}
+#bib .bbtn:hover{background:#F5E6C8}
+#bib .bbtn.save{background:#2D4A3E;color:#FDF6EC;border-color:#2D4A3E;font-weight:600}
+#bib .bbtn.save:hover{background:#3D6B5A}
+#bib .bbtn.save:disabled{opacity:.5;cursor:default}
+#bib .beditor{flex:1;overflow-y:auto;padding:24px 32px}
+#bib .beditor::-webkit-scrollbar{width:4px}
+#bib .beditor::-webkit-scrollbar-thumb{background:rgba(212,160,23,.3);border-radius:2px}
+#bib .bfield{margin-bottom:18px}
+#bib .blabel{font-size:9px;font-family:'DM Mono',monospace;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#8B7355;margin-bottom:5px;display:block}
+#bib .binput{width:100%;padding:9px 11px;border:1px solid rgba(212,160,23,.3);border-radius:4px;font-family:'Playfair Display',serif;font-size:14px;background:white;color:#1A1207;outline:none;transition:border-color .15s;resize:none;line-height:1.7}
+#bib .binput:focus{border-color:#E76F51}
+#bib .binput.btitle{font-size:18px;font-weight:700;padding:11px 13px}
+#bib .binput.bhistoria{min-height:280px;font-family:'DM Sans',sans-serif;font-size:13px}
+#bib .binput.bmoraleja{min-height:70px;font-style:italic}
+#bib .b2col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+#bib .bwc{font-size:9px;font-family:'DM Mono',monospace;color:#8B7355;margin-top:3px;text-align:right}
+#bib .bdivider{border:none;border-top:1px solid rgba(212,160,23,.2);margin:18px 0}
+#bib .bdl{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px;padding-top:16px;border-top:1px solid rgba(212,160,23,.2);align-items:center}
+#bib .bdl-lbl{font-size:9px;font-family:'DM Mono',monospace;color:#8B7355;letter-spacing:.08em;text-transform:uppercase}
+#bib .bdl-pill{font-size:11px;font-family:'DM Mono',monospace;padding:5px 12px;border:1px solid rgba(212,160,23,.35);border-radius:20px;cursor:pointer;background:white;color:#8B7355;transition:all .15s}
+#bib .bdl-pill:hover{background:#F5E6C8;border-color:#F4A261;color:#1A1207}
+#bib .bempty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#8B7355}
+#bib .bempty-ico{font-size:44px;opacity:.2}
+#bib .bempty-txt{font-family:'Playfair Display',serif;font-size:1rem;font-style:italic}
+#bib .bempty-sub{font-size:11px;font-family:'DM Mono',monospace;opacity:.7}
+#bib mark{background:rgba(231,111,81,.2);border-radius:2px;padding:0 2px}
+</style>
+
+<div id="bib">
+  <div class="bsb">
+    <div class="bsb-head">
+      <h3>&#128218; Cuentos Caye</h3>
+      <p>Editor · Karina Urrunaga</p>
+    </div>
+    <div class="bsb-search">
+      <input type="text" id="bq" placeholder="Buscar en titulo, historia, escenario..." oninput="bSearch()">
+      <div class="sh-note">Busca en el contenido completo de cada cuento</div>
+    </div>
+    <div class="bsb-tabs" id="bTabs"></div>
+    <div class="bsb-count" id="bCount">Cargando...</div>
+    <div class="bsb-list" id="bList"></div>
+  </div>
+  <div class="bmain" id="bMain">
+    <div class="bempty">
+      <div class="bempty-ico">&#128214;</div>
+      <div class="bempty-txt">Selecciona un cuento para editarlo</div>
+      <div class="bempty-sub">Los cambios se guardan directamente en Alfred</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+var SB='https://jmkvphayyhwzootlybde.supabase.co';
+var KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impta3ZwaGF5eWh3em9vdGx5YmRlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc5ODE3ODEsImV4cCI6MjA5MzU1Nzc4MX0.EP2vv5avU1FIXlZn4jFo3QkvqnxOdLOrICqNV8qAZxM';
+var stories=[],cur=null,dirty=false,activeSerie='Todos',q='';
+var SERIES=['Todos','Cayetana & Caca','Chimi & Chimu','Raya & Luna','Otros'];
+function getSerie(t){if(/Cayetana|Caca/i.test(t))return'Cayetana & Caca';if(/Chimi|Chimu/i.test(t))return'Chimi & Chimu';if(/^Raya|^Luna/i.test(t))return'Raya & Luna';return'Otros';}
+function emo(s){return({'Cayetana & Caca':'🐆','Chimi & Chimu':'🐱','Raya & Luna':'🐾','Otros':'📖'})[s]||'📖';}
+function esc(t){return String(t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function wc(t){return t?t.split(/\s+/).filter(Boolean).length:0;}
+
+async function bLoad(){
+  try{
+    var r=await fetch(SB+'/rest/v1/cuentos_repositorio?select=*&order=created_at',{headers:{'apikey':KEY,'Authorization':'Bearer '+KEY}});
+    stories=await r.json();
+    bRenderTabs();bRenderList();
+  }catch(e){document.getElementById('bCount').textContent='Error cargando cuentos';}
+}
+
+function bRenderTabs(){
+  var counts={};
+  stories.forEach(function(s){var sr=getSerie(s.titulo);counts[sr]=(counts[sr]||0)+1;});
+  document.getElementById('bTabs').innerHTML=SERIES.map(function(s){
+    return '<button class="btab'+(activeSerie===s?' on':'')+'" onclick="bSetSerie(''+s+'')">'+(s==='Todos'?'Todo ('+stories.length+')':emo(s)+' '+(counts[s]||0))+'</button>';
+  }).join('');
+}
+window.bSetSerie=function(s){activeSerie=s;bRenderTabs();bRenderList();};
+window.bSearch=function(){q=document.getElementById('bq').value.toLowerCase();bRenderList();};
+
+function matchAll(s){
+  if(!q)return true;
+  var haystack=[s.titulo,s.historia,s.moraleja,s.escenario,(s.personajes||[]).join(' '),(s.tags||[]).join(' ')].join(' ').toLowerCase();
+  return haystack.indexOf(q)>=0;
+}
+function snippet(s){
+  if(!q)return'';
+  var fields=[s.historia,s.moraleja,s.escenario];
+  for(var i=0;i<fields.length;i++){
+    var f=fields[i]||'';
+    var idx=f.toLowerCase().indexOf(q);
+    if(idx>=0){var st=Math.max(0,idx-25);var en=Math.min(f.length,idx+q.length+35);return'...'+f.slice(st,en).replace(/
+/g,' ')+'...';}
+  }
+  return'';
+}
+function bRenderList(){
+  var items=stories.filter(function(s){return(activeSerie==='Todos'||getSerie(s.titulo)===activeSerie)&&matchAll(s);});
+  document.getElementById('bCount').textContent=items.length+' cuento'+(items.length!==1?'s':'')+(q?' — en contenido':'');
+  document.getElementById('bList').innerHTML=items.map(function(s){
+    var snip=snippet(s);
+    var hi=q?snip.replace(new RegExp(q.replace(/[.*+?^${}()|[\]\]/g,'\$&'),'gi'),function(m){return'<mark>'+m+'</mark>'}):'';
+    return'<div class="bitem'+(cur&&cur.id===s.id?' on':'')+'" onclick="bSel(''+s.id+'')"><div class="bitem-serie">'+emo(getSerie(s.titulo))+' '+getSerie(s.titulo)+'</div><div class="bitem-title">'+esc(s.titulo)+'</div>'+(hi?'<div class="bitem-match">'+hi+'</div>':'')+'</div>';
+  }).join('');
+}
+window.bSel=function(id){
+  if(dirty&&!confirm('Descartar cambios no guardados?'))return;
+  cur=stories.filter(function(s){return s.id===id;})[0];
+  dirty=false;bRenderEditor();bRenderList();
+};
+function bSt(cls,msg){var el=document.getElementById('bSt');if(el){el.className='bst '+cls;el.textContent=msg;}}
+window.bMarkDirty=function(){dirty=true;bSt('unsaved','● Sin guardar');};
+window.bSync=function(f,v){if(cur)cur[f]=v;};
+window.bSyncArr=function(f,v){if(cur)cur[f]=v.split(/[,
+]+/).map(function(x){return x.trim();}).filter(Boolean);};
+window.bWcUpd=function(){var h=document.getElementById('bf-hist'),w=document.getElementById('bWC');if(h&&w)w.textContent=wc(h.value)+' palabras';};
+
+function bRenderEditor(){
+  var s=cur;
+  document.getElementById('bMain').innerHTML=
+    '<div class="btopbar"><div class="btopbar-l"><div class="btopbar-serie">'+emo(getSerie(s.titulo))+' '+getSerie(s.titulo)+'</div><div class="btopbar-title">'+esc(s.titulo)+'</div></div>'+
+    '<div class="btopbar-r"><span class="bst saved" id="bSt">&#10003; Guardado</span>'+
+    '<button class="bbtn" onclick="bDlTXT()">TXT</button><button class="bbtn" onclick="bDlDOC()">Word</button><button class="bbtn" onclick="bDlPDF()">PDF</button>'+
+    '<button class="bbtn save" id="bSaveBtn" onclick="bSave()">Guardar en Alfred</button></div></div>'+
+    '<div class="beditor">'+
+    '<div class="bfield"><label class="blabel">Titulo</label><textarea class="binput btitle" id="bf-titulo" rows="2" oninput="bSync('titulo',this.value);bMarkDirty()">'+esc(s.titulo)+'</textarea></div>'+
+    '<div class="b2col">'+
+    '<div class="bfield"><label class="blabel">Escenario</label><textarea class="binput" rows="2" oninput="bSync('escenario',this.value);bMarkDirty()">'+esc(s.escenario)+'</textarea></div>'+
+    '<div class="bfield"><label class="blabel">Edad</label><textarea class="binput" rows="2" oninput="bSync('edad_rango',this.value);bMarkDirty()">'+esc(s.edad_rango)+'</textarea></div>'+
+    '<div class="bfield"><label class="blabel">Tono</label><textarea class="binput" rows="2" oninput="bSync('tono',this.value);bMarkDirty()">'+esc(s.tono)+'</textarea></div>'+
+    '<div class="bfield"><label class="blabel">Valores</label><textarea class="binput" rows="2" oninput="bSync('moral_tema',this.value);bMarkDirty()">'+esc(s.moral_tema)+'</textarea></div>'+
+    '</div>'+
+    '<div class="bfield"><label class="blabel">Personajes (uno por linea)</label><textarea class="binput" rows="3" oninput="bSyncArr('personajes',this.value);bMarkDirty()">'+esc((s.personajes||[]).join('
+'))+'</textarea></div>'+
+    '<hr class="bdivider">'+
+    '<div class="bfield"><label class="blabel">Historia</label><textarea class="binput bhistoria" id="bf-hist" oninput="bSync('historia',this.value);bMarkDirty();bWcUpd()">'+esc(s.historia)+'</textarea><div class="bwc" id="bWC">'+wc(s.historia)+' palabras</div></div>'+
+    '<div class="bfield"><label class="blabel">Moraleja</label><textarea class="binput bmoraleja" oninput="bSync('moraleja',this.value);bMarkDirty()">'+esc(s.moraleja)+'</textarea></div>'+
+    '<div class="bfield"><label class="blabel">Tags</label><textarea class="binput" rows="2" oninput="bSyncArr('tags',this.value);bMarkDirty()">'+esc((s.tags||[]).join(', '))+'</textarea></div>'+
+    '<div class="bdl"><span class="bdl-lbl">Descargar:</span>'+
+    '<button class="bdl-pill" onclick="bDlTXT()">TXT</button>'+
+    '<button class="bdl-pill" onclick="bDlDOC()">Word</button>'+
+    '<button class="bdl-pill" onclick="bDlPDF()">PDF</button></div>'+
+    '</div>';
+}
+
+window.bSave=async function(){
+  if(!cur)return;
+  var btn=document.getElementById('bSaveBtn');btn.disabled=true;bSt('saving','Guardando...');
+  var p={titulo:cur.titulo,historia:cur.historia,moraleja:cur.moraleja,personajes:cur.personajes,escenario:cur.escenario,tono:cur.tono,moral_tema:cur.moral_tema,edad_rango:cur.edad_rango,tags:cur.tags};
+  try{
+    var r=await fetch(SB+'/rest/v1/cuentos_repositorio?id=eq.'+cur.id,{method:'PATCH',headers:{'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(p)});
+    if(r.ok||r.status===204){dirty=false;bSt('saved','Guardado en Alfred');var i=stories.findIndex(function(s){return s.id===cur.id;});if(i>=0)Object.assign(stories[i],p);bRenderList();}
+    else bSt('error','Error '+r.status);
+  }catch(e){bSt('error','Sin conexion');}
+  btn.disabled=false;
+};
+
+function bFN(){return(cur.titulo||'cuento').replace(/[^\w\s]/g,'').replace(/\s+/g,'_').slice(0,60);}
+function bDl(blob,name){var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();}
+
+window.bDlTXT=function(){
+  var s=cur;
+  bDl(new Blob([s.titulo+'
+
+Personajes: '+(s.personajes||[]).join(', ')+'
+Escenario: '+(s.escenario||'')+'
+
+HISTORIA
+
+'+(s.historia||'')+'
+
+MORALEJA
+
+'+(s.moraleja||'')],{type:'text/plain;charset=utf-8'}),bFN()+'.txt');
+};
+window.bDlDOC=function(){
+  var s=cur;
+  var h='<html><head><meta charset="utf-8"><style>body{font-family:Calibri,sans-serif;font-size:12pt;line-height:1.7;margin:2.5cm}h1{font-size:20pt;font-weight:bold;margin-bottom:4pt}hr{border:none;border-top:1px solid #ccc;margin:16pt 0}p{margin-bottom:8pt}.meta{font-size:10pt;color:#888;margin-bottom:16pt}.mor{border-left:4px solid #E76F51;padding:12pt 14pt;margin-top:16pt;font-style:italic;background:#fdf6ec}</style></head><body><h1>'+s.titulo+'</h1><div class="meta"><b>Personajes:</b> '+(s.personajes||[]).join(', ')+'<br><b>Escenario:</b> '+(s.escenario||'')+'</div><hr>'+(s.historia||'').split('
+').map(function(l){return l?'<p>'+l+'</p>':''}).join('')+'<div class="mor"><b>Moraleja:</b> '+(s.moraleja||'')+'</div></body></html>';
+  bDl(new Blob(['﻿'+h],{type:'application/msword'}),bFN()+'.doc');
+};
+window.bDlPDF=function(){
+  var s=cur;
+  var h='<!DOCTYPE html><html><head><meta charset="utf-8"><title>'+s.titulo+'</title><style>@page{margin:2.5cm}body{font-family:Georgia,serif;font-size:12pt;line-height:1.8;color:#1A1207}h1{font-size:20pt;font-weight:bold;margin-bottom:4pt}hr{border:none;border-top:1px solid #ddd;margin:18pt 0}p{margin-bottom:9pt}.meta{font-size:10pt;color:#888;margin-bottom:18pt}.mor{border-left:4px solid #E76F51;padding:12pt 14pt;margin-top:18pt;font-style:italic;background:#fdf6ec}</style></head><body><h1>'+s.titulo+'</h1><div class="meta">'+(s.personajes||[]).join(' · ')+' | '+(s.escenario||'')+'</div><hr>'+(s.historia||'').split('
+').map(function(l){return l?'<p>'+l+'</p>':''}).join('')+'<div class="mor">Moraleja: '+(s.moraleja||'')+'</div></body></html>';
+  var w=window.open('','_blank');w.document.write(h);w.document.close();w.onload=function(){w.focus();w.print();};
+};
+
+bLoad();
+})();
+</script>
+</section>
+
+</body>
+</html>
